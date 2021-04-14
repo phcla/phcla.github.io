@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+    <title>注册页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link rel="stylesheet" href="css/loginRegister.css" type="text/css" media="all">
+</head>
+
+<body>
+
+<h1>springboot学习系统</h1>
+
+<div class="container" id="app">
+    <div class="login">
+        <h2>员工登录</h2>
+        <div class="form">
+            <input v-model="email" type="text"  placeholder="请输入邮箱">
+            <button class="sendCode" @click="sendCode">发送验证码</button>
+            <input v-model="code" type="text" placeholder="输入验证码" >
+            <button class="loginBtn" @click="dologin">登录</button>
+        </div>
+    </div>
+</div>
+
+<script src="./js/vue.min.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            email:"",
+            code:""
+        },
+        methods:{
+            sendCode(){
+                axios.get(`common/${this.email}`).then(responce=>{
+                    console.log("发送了")
+                })
+            },
+            dologin(){
+                axios.get(`common/${this.email}/${this.code}`).then(response=>{
+                    console.log("登陆了")
+                })
+            }
+        }
+    })
+</script>
+</body>
+
+</html>
